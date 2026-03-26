@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WeatherSphere | Live Weather Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="weather-app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">⛅</span>
+          <h1>WeatherSphere</h1>
+        </div>
+        <p class="tagline">Real-time weather insights</p>
+      </div>
+    </header>
+
+    <!-- Search Section -->
+    <div class="search-section">
+      <div class="search-container">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input 
+            type="text" 
+            id="cityInput" 
+            placeholder="Search city... (e.g., London, New York, Tokyo)"
+            autocomplete="off"
+            aria-label="Search for a city"
+          >
+          <button id="searchBtn" class="search-btn" aria-label="Search">Search</button>
+        </div>
+        <div class="search-suggestions" id="suggestions"></div>
+      </div>
+      <button id="useLocationBtn" class="location-btn" aria-label="Use my current location">
+        📍 Use My Location
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state hidden">
+      <div class="spinner"></div>
+      <p>Fetching weather data...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="errorState" class="error-state hidden">
+      <div class="error-content">
+        <span class="error-icon">⚠️</span>
+        <h3>Unable to load weather data</h3>
+        <p id="errorMessage">Something went wrong. Please try again.</p>
+        <button id="retryBtn" class="retry-btn">Try Again</button>
+      </div>
+    </div>
+
+    <!-- Main Weather Content -->
+    <main id="weatherContent" class="weather-content hidden">
+      <!-- Current Weather Section -->
+      <section class="current-weather">
+        <div class="current-card">
+          <div class="current-header">
+            <div>
+              <h2 id="cityName">City Name</h2>
+              <p id="currentDate" class="date"></p>
+            </div>
+            <div class="temp-unit-toggle">
+              <button id="celsiusBtn" class="unit-btn active">°C</button>
+              <button id="fahrenheitBtn" class="unit-btn">°F</button>
+            </div>
+          </div>
+          <div class="weather-main">
+            <div class="temp-section">
+              <span id="currentTemp" class="current-temp">--</span>
+              <div class="weather-info">
+                <img id="weatherIcon" class="weather-icon" src="" alt="Weather icon">
+                <p id="weatherDesc" class="weather-desc">--</p>
+              </div>
+            </div>
+            <div class="details-grid">
+              <div class="detail-card">
+                <span class="detail-icon">💧</span>
+                <div>
+                  <p class="detail-label">Humidity</p>
+                  <p id="humidity" class="detail-value">--%</p>
+                </div>
+              </div>
+              <div class="detail-card">
+                <span class="detail-icon">💨</span>
+                <div>
+                  <p class="detail-label">Wind Speed</p>
+                  <p id="windSpeed" class="detail-value">-- km/h</p>
+                </div>
+              </div>
+              <div class="detail-card">
+                <span class="detail-icon">🎯</span>
+                <div>
+                  <p class="detail-label">Pressure</p>
+                  <p id="pressure" class="detail-value">-- hPa</p>
+                </div>
+              </div>
+              <div class="detail-card">
+                <span class="detail-icon">👁️</span>
+                <div>
+                  <p class="detail-label">Visibility</p>
+                  <p id="visibility" class="detail-value">-- km</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5-Day Forecast Section -->
+      <section class="forecast-section">
+        <h3>5-Day Forecast</h3>
+        <div id="forecastContainer" class="forecast-container"></div>
+      </section>
+
+      <!-- Additional Info -->
+      <section class="additional-info">
+        <div class="info-card">
+          <span class="info-icon">🌅</span>
+          <div>
+            <p class="info-label">Sunrise</p>
+            <p id="sunrise" class="info-value">--:--</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🌇</span>
+          <div>
+            <p class="info-label">Sunset</p>
+            <p id="sunset" class="info-value">--:--</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">🌡️</span>
+          <div>
+            <p class="info-label">Feels Like</p>
+            <p id="feelsLike" class="info-value">--°C</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <span class="info-icon">☁️</span>
+          <div>
+            <p class="info-label">Cloud Cover</p>
+            <p id="cloudCover" class="info-value">--%</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Data provided by <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeatherMap</a></p>
+      <p class="api-status" id="apiStatus">API: Free tier - limited to 60 calls/min</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
